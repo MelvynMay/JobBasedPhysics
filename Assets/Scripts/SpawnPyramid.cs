@@ -41,54 +41,54 @@ public class SpawnPyramid : MonoBehaviour
 
     void Spawn()
     {
-        if ( m_SpawnItems.Length == 0)
-            return;
+        if ( m_SpawnItems.Length > 0)
+        {
+            var x = 0.0f;
+            var y = 0.0f;
 
-        var x = 0.0f;
-        var y = 0.0f;
+		    for (var i = 0; i < m_SpawnCount; ++i)
+		    {
+			    x = i * m_SpacingX * 0.5f;
 
-		for (var i = 0; i < m_SpawnCount; ++i)
-		{
-			x = i * m_SpacingX * 0.5f;
-
-			for (var j = i; j < m_SpawnCount; ++j)
-			{
-			    var obj = m_SpawnItems[Random.Range (0, m_SpawnItems.Length)];
-			    if (obj)
+			    for (var j = i; j < m_SpawnCount; ++j)
 			    {
-				    var position = transform.TransformPoint (new Vector3 (x, y, transform.position.z));
-				    var rotation = Random.Range (0.0f, m_RandomRotation);
+			        var obj = m_SpawnItems[Random.Range (0, m_SpawnItems.Length)];
+			        if (obj)
+			        {
+				        var position = transform.TransformPoint (new Vector3 (x, y, transform.position.z));
+				        var rotation = Random.Range (0.0f, m_RandomRotation);
 
-				    // Create the spawn object at the random position & rotation.
-				    var spawnObj = Instantiate (obj, position, Quaternion.Euler (0f, 0f, rotation), m_SpawnParent ? m_SpawnParent : transform);
+				        // Create the spawn object at the random position & rotation.
+				        var spawnObj = Instantiate (obj, position, Quaternion.Euler (0f, 0f, rotation), m_SpawnParent ? m_SpawnParent : transform);
 
-				    // Set its random scale.
-				    var randomScale = Random.Range (m_MinScale, m_MaxScale);
-				    spawnObj.transform.localScale = new Vector3 (randomScale, randomScale);
+				        // Set its random scale.
+				        var randomScale = Random.Range (m_MinScale, m_MaxScale);
+				        spawnObj.transform.localScale = new Vector3 (randomScale, randomScale);
 
-				    // Set its layer.
-				    spawnObj.layer = m_Layer;
+				        // Set its layer.
+				        spawnObj.layer = m_Layer;
 
-                    var body = spawnObj.GetComponent<Rigidbody2D> ();
-				    if (body)
-				    {
-					    body.gravityScale = m_GravityScale;
-                        body.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
-				    }
+                        var body = spawnObj.GetComponent<Rigidbody2D> ();
+				        if (body)
+				        {
+					        body.gravityScale = m_GravityScale;
+                            body.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+				        }
 
-				    // Set a random sprite renderer color if required.
-				    if (m_UseRandomColor)
-				    {
-					    var spriteRenderer = spawnObj.GetComponentInChildren<SpriteRenderer> ();
-					    if (spriteRenderer)
-						    spriteRenderer.color = new Color (Random.Range (0f, 1f), Random.Range (0f, 1f), Random.Range (0f, 1f), 1.0f);
-				    }
-                }
+				        // Set a random sprite renderer color if required.
+				        if (m_UseRandomColor)
+				        {
+					        var spriteRenderer = spawnObj.GetComponentInChildren<SpriteRenderer> ();
+					        if (spriteRenderer)
+						        spriteRenderer.color = new Color (Random.Range (0f, 1f), Random.Range (0f, 1f), Random.Range (0f, 1f), 1.0f);
+				        }
+                    }
 
-				x += m_SpacingX;
-			}
+				    x += m_SpacingX;
+			    }
 
-			y += m_SpacingY;
-		}
+			    y += m_SpacingY;
+		    }
+        }
     }
 }
