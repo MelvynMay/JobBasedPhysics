@@ -20,7 +20,7 @@ Physics2DSettings:
   m_AngularSleepTolerance: 2
   m_DefaultContactOffset: 0.01
   m_JobOptions:
-    m_UseMultithreading: 0
+    m_UseMultithreading: 1
     m_UseConsistencySorting: 0
     m_InterpolationPosesPerJob: 100
     m_NewContactsPerJob: 30
@@ -35,6 +35,8 @@ Physics2DSettings:
     m_IslandSolverBodyCostScale: 1
     m_IslandSolverContactCostScale: 10
     m_IslandSolverJointCostScale: 10
+    m_IslandSolverBodiesPerJob: 500
+    m_IslandSolverContactsPerJob: 50
   m_AutoSimulation: 0
   m_QueriesHitTriggers: 1
   m_QueriesStartInColliders: 1

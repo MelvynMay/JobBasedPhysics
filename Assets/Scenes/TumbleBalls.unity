@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 143492418}
   - component: {fileID: 143492419}
   m_Layer: 0
-  m_Name: RunSimulation
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_SpawnPerFrame: 3
   m_SpawnItem: {fileID: 1740058600656648, guid: 231c55d83fd2a7645bee91b0381c02a4,
     type: 2}
-  m_PerFrameUpdate: 1
   m_CurrentSpawn: 0
 --- !u!1 &225978470
 GameObject:
@@ -723,6 +722,47 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 55, y: 5}
   m_EdgeRadius: 0
+--- !u!1 &1293977356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1293977358}
+  - component: {fileID: 1293977357}
+  m_Layer: 0
+  m_Name: Simulation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1293977357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1293977356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b773b76540a224dbaa27eb5daa8347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PerFrameUpdate: 1
+--- !u!4 &1293977358
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1293977356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.86, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346898911
 GameObject:
   m_ObjectHideFlags: 0

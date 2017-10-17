@@ -10,7 +10,6 @@ public class StressSimulation : MonoBehaviour
     public int m_MaxSpawn = 1000;
     public int m_SpawnPerFrame = 100;
     public GameObject m_SpawnItem;
-    public bool m_PerFrameUpdate = true;
 
     public int m_CurrentSpawn = 0;
 
@@ -19,14 +18,6 @@ public class StressSimulation : MonoBehaviour
 		
 	}
 
-    void FixedUpdate()
-    {
-        if (m_PerFrameUpdate)
-            return;
-
-        RunSimulation(Time.fixedDeltaTime);
-    }
-	
 	void Update ()
     {
         // Spawn.
@@ -41,16 +32,5 @@ public class StressSimulation : MonoBehaviour
                 m_CurrentSpawn++;
             }
         }
-
-        if (!m_PerFrameUpdate)
-            return;
-
-        RunSimulation(Time.deltaTime);
 	}
-
-    void RunSimulation(float timeDelta)
-    {
-        // Simulate.
-        Physics2D.Simulate(timeDelta);
-    }
 }
