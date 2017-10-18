@@ -29,6 +29,8 @@ public class SpawnPyramid : MonoBehaviour
 
 	public bool m_UseRandomColor;
 
+    public CollisionDetectionMode2D m_DetectionMode;
+
 	public Transform m_SpawnParent;
 
     public GameObject[] m_SpawnItems;
@@ -72,7 +74,7 @@ public class SpawnPyramid : MonoBehaviour
 				        if (body)
 				        {
 					        body.gravityScale = m_GravityScale;
-                            body.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+                            body.collisionDetectionMode = m_DetectionMode;
 				        }
 
 				        // Set a random sprite renderer color if required.

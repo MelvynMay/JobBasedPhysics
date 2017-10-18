@@ -24,54 +24,57 @@ public class RandomSpawner : MonoBehaviour
 	[Range (0, 31)]
 	public int m_Layer;
 
+    public CollisionDetectionMode2D m_DetectionMode;
+
 	public bool m_UseRandomColor;
 
     public Transform m_SpawnParent;
 
     public GameObject m_SpawnItem;
 
-    public int m_CurrentSpawn = 0;
+    private List<GameObject> m_SpawnPool;
+    private int m_CurrentSpawn = 0;
 
 	void Start ()
     {
-		
+		m_SpawnPool = new List<GameObject>(m_MaxSpawn);
+
+        for (var i = 0; i < m_MaxSpawn; ++i)
+        {
+            var pos = new Vector3(Random.Range(m_SpawnRangeX.x, m_SpawnRangeX.y), Random.Range(m_SpawnRangeY.x, m_SpawnRangeY.y), 0.0f);
+			var rotation = Random.Range (0.0f, m_RandomRotation);
+            var spawnObj = Instantiate(m_SpawnItem, pos, Quaternion.Euler (0f, 0f, rotation), m_SpawnParent);
+            m_SpawnPool.Add(spawnObj);
+            spawnObj.SetActive(false);
+
+			// Set its random scale.
+			var randomScale = Random.Range (m_MinScale, m_MaxScale);
+			spawnObj.transform.localScale = new Vector3 (randomScale, randomScale);
+
+			// Set its layer.
+			spawnObj.layer = m_Layer;
+
+            var body = spawnObj.GetComponent<Rigidbody2D> ();
+			if (body)
+			{
+				body.gravityScale = m_GravityScale;
+                body.collisionDetectionMode = m_DetectionMode;
+			}
+
+			// Set a random sprite renderer color if required.
+			if (m_UseRandomColor)
+			{
+				var spriteRenderer = spawnObj.GetComponentInChildren<SpriteRenderer> ();
+				if (spriteRenderer)
+					spriteRenderer.color = new Color (Random.Range (0f, 1f), Random.Range (0f, 1f), Random.Range (0f, 1f), 1.0f);
+			}
+        }
 	}
 
 	void Update ()
     {
         // Spawn.
         if (m_CurrentSpawn < m_MaxSpawn)
-        {
-            var spawnCount = Mathf.Min(m_SpawnPerFrame, m_MaxSpawn - m_CurrentSpawn);            
-            for (var i = 0; i < spawnCount; ++i)
-            {
-                var pos = new Vector3(Random.Range(m_SpawnRangeX.x, m_SpawnRangeX.y), Random.Range(m_SpawnRangeY.x, m_SpawnRangeY.y), 0.0f);
-				var rotation = Random.Range (0.0f, m_RandomRotation);
-                var spawnObj = Instantiate(m_SpawnItem, pos, Quaternion.Euler (0f, 0f, rotation), m_SpawnParent);
-                m_CurrentSpawn++;
-
-				    // Set its random scale.
-				    var randomScale = Random.Range (m_MinScale, m_MaxScale);
-				    spawnObj.transform.localScale = new Vector3 (randomScale, randomScale);
-
-				    // Set its layer.
-				    spawnObj.layer = m_Layer;
-
-                    var body = spawnObj.GetComponent<Rigidbody2D> ();
-				    if (body)
-				    {
-					    body.gravityScale = m_GravityScale;
-                        body.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
-				    }
-
-				    // Set a random sprite renderer color if required.
-				    if (m_UseRandomColor)
-				    {
-					    var spriteRenderer = spawnObj.GetComponentInChildren<SpriteRenderer> ();
-					    if (spriteRenderer)
-						    spriteRenderer.color = new Color (Random.Range (0f, 1f), Random.Range (0f, 1f), Random.Range (0f, 1f), 1.0f);
-				    }
-            }
-        }
+            m_SpawnPool[m_CurrentSpawn++].SetActive(true);
 	}
 }

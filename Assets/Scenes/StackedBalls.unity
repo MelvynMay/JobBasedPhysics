@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b773b76540a224dbaa27eb5daa8347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PerFrameUpdate: 1
+  m_PerFrameUpdate: 0
 --- !u!4 &156513558
 Transform:
   m_ObjectHideFlags: 0
@@ -537,13 +537,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SpawnRangeX: {x: -12, y: 12}
   m_SpawnRangeY: {x: 15, y: 20}
-  m_MaxSpawn: 2000
+  m_MaxSpawn: 1000
   m_SpawnPerFrame: 10
   m_MinScale: 0.2
-  m_MaxScale: 1.1
+  m_MaxScale: 1
   m_GravityScale: 1
   m_RandomRotation: 0
   m_Layer: 9
+  m_DetectionMode: 0
   m_UseRandomColor: 1
   m_SpawnParent: {fileID: 109884880}
   m_SpawnItem: {fileID: 1740058600656648, guid: 231c55d83fd2a7645bee91b0381c02a4,
