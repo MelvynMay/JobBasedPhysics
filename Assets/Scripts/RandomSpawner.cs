@@ -75,6 +75,10 @@ public class RandomSpawner : MonoBehaviour
     {
         // Spawn.
         if (m_CurrentSpawn < m_MaxSpawn)
-            m_SpawnPool[m_CurrentSpawn++].SetActive(true);
+        {
+            var spawnCount = Mathf.Min(m_SpawnPerFrame, m_MaxSpawn - m_CurrentSpawn);
+            for(int n = 0; n < spawnCount; ++n)
+                m_SpawnPool[m_CurrentSpawn++].SetActive(true);
+        }
 	}
 }
